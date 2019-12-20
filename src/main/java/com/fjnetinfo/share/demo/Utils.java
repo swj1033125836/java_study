@@ -1,0 +1,1 @@
+package com.fjnetinfo.share.demo;import com.alibaba.fastjson.JSON;public class Utils {    public static String parseData() {        String jsonString = "{\"name\":\"张三\",\"age\":50}";        User user= JSON.parseObject(jsonString,User.class);        System.out.println("name:"+user.getName()+" age:"+user.getAge());        return "Ok";    }}
