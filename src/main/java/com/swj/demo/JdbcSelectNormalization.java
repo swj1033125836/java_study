@@ -8,7 +8,7 @@ public class JdbcSelectNormalization {
         Connection connection = null;//定义引用
         Statement statement = null;
         ResultSet resultSet = null;
-        String args[] = new String[200];
+        String args[] = new String[2000];
         int i = 0;
         try {
             /*
@@ -33,10 +33,17 @@ public class JdbcSelectNormalization {
              * getString()和getObject()比较通用
              */
 
+//            while (resultSet.next()){
+//                args[i] = (resultSet.getString("org_id") +":"+
+//                        resultSet.getString("user_id") +":"+ resultSet.getString("user_name"));
+//                i++;
+//            }
+            int count = resultSet.getMetaData().getColumnCount();
             while (resultSet.next()){
-                args[i] = (resultSet.getString("org_id") +":"+
-                        resultSet.getString("user_id") +":"+ resultSet.getString("user_name"));
-                i++;
+                for (int a = 1;a <= count; a++){//遍历列
+                    args[i] = resultSet.getString(a);
+                    i++;
+                }
             }
         }catch (Exception e){
             throw new RuntimeException(e);
